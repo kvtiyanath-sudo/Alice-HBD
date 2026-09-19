@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Alice 🎂💗</title>
+    <!-- Google Fonts: Kanit -->
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffc0cb 0%, #fff0f5 50%, #e6e6fa 100%);
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
+            color: #555;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ตกแต่งสายรุ้งและเมฆด้านหลัง */
+        .sky-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .rainbow {
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            box-shadow: 0 0 0 15px rgba(255, 182, 193, 0.4),
+                        0 0 0 30px rgba(255, 218, 185, 0.4),
+                        0 0 0 45px rgba(255, 255, 224, 0.4),
+                        0 0 0 60px rgba(152, 251, 152, 0.4),
+                        0 0 0 75px rgba(135, 206, 250, 0.4);
+            opacity: 0.6;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 30px 20px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.25);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            z-index: 10;
+            border: 3px solid #ffb6c1;
+            transition: all 0.5s ease;
+        }
+
+        h2 {
+            color: #d87093;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        input[type="password"] {
+            width: 80%;
+            padding: 12px;
+            border: 2px solid #ffb6c1;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            text-align: center;
+            outline: none;
+            margin-bottom: 15px;
+            background: #fffafa;
+            color: #d87093;
+        }
+
+        input[type="password"]:focus {
+            border-color: #ff69b4;
+            box-shadow: 0 0 8px rgba(255, 105, 180, 0.3);
+        }
+
+        .btn {
+            background: #ff69b4;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);
+            transition: 0.2s;
+            font-weight: 500;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            background: #ff1493;
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background: #ffb6c1;
+        }
+        .btn-secondary:hover {
+            background: #ff69b4;
+        }
+
+        .cat-img {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            animation: bounce 2s infinite ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* หน้า 3: เค้กและเทียน */
+        .cake-container {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 20px auto;
+            background: #fff0f5;
+            border-radius: 50% 50% 40% 40%;
+            border: 4px solid #ffb6c1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: inset 0 -10px 20px rgba(0,0,0,0.05);
+        }
+
+        .candles-box {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .candle {
+            width: 12px;
+            height: 45px;
+            background: linear-gradient(to bottom, #ff69b4, #ffb6c1);
+            border-radius: 6px;
+            position: relative;
+            cursor: pointer;
+            opacity: 0.3;
+            transition: 0.3s;
+        }
+
+        .candle.lit {
+            opacity: 1;
+        }
+
+        .flame {
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 20px;
+            background: #ffa500;
+            border-radius: 50% 50% 20% 20%;
+            box-shadow: 0 0 10px #ff4500, 0 0 20px #ffff00;
+            animation: flicker 0.6s infinite alternate;
+            display: none;
+        }
+
+        .candle.lit .flame {
+            display: block;
+        }
+
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scale(1); opacity: 0.9; }
+            100% { transform: translateX(-50%) scale(1.15); opacity: 1; }
+        }
+
+        /* หน้า 4: ซองจดหมาย */
+        .envelope {
+            background: #ffb6c1;
+            width: 220px;
+            height: 140px;
+            margin: 20px auto;
+            border-radius: 10px;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.3s;
+        }
+        .envelope:hover {
+            transform: scale(1.03);
+        }
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 110px solid transparent;
+            border-right: 110px solid transparent;
+            border-top: 80px solid #ff69b4;
+            transform-origin: top;
+            transition: 0.5s;
+        }
+        .letter-content {
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            max-height: 250px;
+            overflow-y: auto;
+            text-align: left;
+            font-size: 0.9rem;
+            color: #555;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+            margin-bottom: 15px;
+        }
+
+        /* โหมดมืดตอนเป่าเทียน */
+        body.dark-mode {
+            background: #1a1a1a !important;
+            color: #eee !important;
+        }
+        body.dark-mode .container {
+            background: rgba(30, 30, 30, 0.95);
+            border-color: #444;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+        }
+        body.dark-mode h2, body.dark-mode p {
+            color: #ffb6c1;
+        }
+
+        .error-msg {
+            color: #ff4500;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            min-height: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sky-bg">
+        <div class="rainbow"></div>
+    </div>
+
+    <!-- หน้า 1: ใส่รหัส -->
+    <div id="page-1" class="container">
+        <img src="https://api.iconify.design/fluent-emoji:cat-face.svg" class="cat-img" alt="Cat">
+        <h2>คนนี้ใช่เจ้าของวันเกิดตัวจริงมั้ยน้า ใส่รหัสเช็คความน่ารักก่อนเข้าเว็บ</h2>
+        <input type="password" id="passcode" placeholder="PIN 4 หลัก" maxlength="4">
+        <br>
+        <button class="btn" onclick="checkPass()">ตรวจสอบความน่ารัก🫶🏻</button>
+        <div id="err-msg" class="error-msg"></div>
+    </div>
+
+    <!-- หน้า 2: ถามความพร้อม -->
+    <div id="page-2" class="container hidden">
+        <img src="https://api.iconify.design/fluent-emoji:kissing-cat.svg" class="cat-img" alt="Kissing Cat">
+        <p>ถูกแบบนี้แสดงว่าคือคนน่ารักของไอเองสิน้าา ยูพร้อมรึยังคะ</p>
+        <div>
+            <button class="btn" onclick="nextPage(3)">Yes</button>
+            <button class="btn btn-secondary" id="no-btn" onclick="clickNo()">No</button>
+        </div>
+        <div id="no-msg" class="error-msg"></div>
+    </div>
+
+    <!-- หน้า 3: จุดเทียน เป่าเทียน -->
+    <div id="page-3" class="container hidden">
+        <h2>เค้กแมวน่ารัก ๆ ของอลิซ 🎂</h2>
+        <div class="cake-container">
+            <span style="font-size: 50px;">🐱🍰</span>
+        </div>
+        <p id="cake-instruction">กดปักเทียนทีละเล่มกันเถอะ (0/3)</p>
+        <div class="candles-box">
+            <div class="candle" id="c1" onclick="lightCandle(1)"><div class="flame"></div></div>
+            <div class="candle" id="c2" onclick="lightCandle(2)"><div class="flame"></div></div>
+            <div class="candle" id="c3" onclick="lightCandle(3)"><div class="flame"></div></div>
+        </div>
+        <button id="blow-btn" class="btn hidden" onclick="blowCandle()">💨 เป่าเค้กกัน!</button>
+        <!-- ซ่อน Audio สำหรับใส่เพลงแฮปปี้เบิร์ธเดย์ของคุณเอง -->
+        <!-- วิธีใช้: แทนที่ลิงก์ใน src ด้วยไฟล์เสียงของคุณ หรืออัปโหลดไฟล์เพลงไว้ใน GitHub เดียวกันแล้วใส่ชื่อไฟล์ เช่น src="my-hbd-song.mp3" -->
+        <audio id="hbd-audio" src="" preload="auto"></audio>
+    </div>
+
+    <!-- หน้า 4: จดหมายอวยพร -->
+    <div id="page-4" class="container hidden">
+        <h2>💌 มีจดหมายส่งถึงยูด้วยน้า</h2>
+        <div id="envelope-box" class="envelope" onclick="openLetter()">
+            <div class="envelope-flap" id="flap"></div>
+            <span style="font-size: 40px; z-index: 2;">💗</span>
+        </div>
+        <div id="letter-box" class="hidden">
+            <div class="letter-content">
+                Happy Birthday นะยู 🎂💗<br><br>
+                ขอให้ปีนี้เป็นปีที่น่ารักกับยูมาก ๆ เลยนะ ขอให้ยูเจอแต่เรื่องดี ๆ มีความสุขในทุก ๆ วัน อยากทำอะไรก็ขอให้สมหวัง มีคนรักยูเยอะ ๆ และที่สำคัญอย่าลืมว่าไอจะคอยอยู่ข้าง ๆ ยูเสมอนะ 🫶🏻<br><br>
+                ขอบคุณที่เข้ามาเป็นความสุข เป็นรอยยิ้ม และเป็นคนพิเศษของไอ ขอบคุณสำหรับทุกช่วงเวลาที่เราได้อยู่ด้วยกันนะ ถึงบางทีไออาจจะงอแง ดื้อ หรือทำตัวไม่น่ารักไปบ้าง แต่ไอรักยูมาก ๆ เลยน้าา 🥺💞<br><br>
+                วันเกิดปีนี้ไอขอให้ยูมีความสุขมากที่สุดเลย ขอให้รอยยิ้มของยูอยู่กับยูไปนาน ๆ และถ้าเป็นไปได้ ไอก็อยากอยู่เห็นรอยยิ้มนั้นในทุก ๆ ปีเลยนะ<br><br>
+                รักยูนะ เจ้าของวันเกิดของไอ 🎀💐<br>
+                ขอให้วันนี้เป็นวันที่น่ารักที่สุดของยูเลยยย 💗
+            </div>
+            <button class="btn" onclick="nextPage(5)">อ่านจบแล้ว ไปหน้าถัดไป 👉🏻</button>
+        </div>
+    </div>
+
+    <!-- หน้า 5: ประเมินความสุข -->
+    <div id="page-5" class="container hidden">
+        <img src="https://api.iconify.design/fluent-emoji:smiling-cat-with-heart-eyes.svg" class="cat-img" alt="Happy Cat">
+        <h2>วันนี้ยูรู้สึกยังไงบ้างน้า?</h2>
+        <button class="btn" style="display:block; width:100%; margin:10px 0;" onclick="nextPage(6)">ความสุขมากก ✨</button>
+        <button class="btn" style="display:block; width:100%; margin:10px 0;" onclick="nextPage(6)">ยิ้มแก้มแตก 🥰</button>
+        <button class="btn" style="display:block; width:100%; margin:10px 0;" onclick="nextPage(6)">อยากดูอีกคับบ 💖</button>
+    </div>
+
+    <!-- หน้า 6: หน้าสุดท้าย -->
+    <div id="page-6" class="container hidden">
+        <img src="https://api.iconify.design/fluent-emoji:cats.svg" class="cat-img" alt="Hug Cats">
+        <h2>ขอบคุณที่เปิดน้า</h2>
+        <p>ขอภาพเจ้าของวันเกิดยิ้มแฉ่งให้คนทำชื่นใจหน่อยน้าา ไอรักยูนะคะ 🐱💕</p>
+    </div>
+
+    <script>
+        let currentCandles = 0;
+
+        function nextPage(pageNum) {
+            document.querySelectorAll('.container').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`page-${pageNum}`).classList.remove('hidden');
+        }
+
+        // หน้า 1: เช็ครหัส
+        function checkPass() {
+            const pin = document.getElementById('passcode').value;
+            const err = document.getElementById('err-msg');
+            if (pin === '2109') {
+                nextPage(2);
+            } else {
+                err.textContent = 'รหัสไม่ใช่น้า ลองใหม่อีกทีซิ 🥺 (รหัสคือ 2109)';
+            }
+        }
+
+        // หน้า 2: ปุ่ม No ดื้อๆ
+        let noClickCount = 0;
+        const noMessages = [
+            "ทำไมอ่าา กดYesเถอะน้าา 🥺",
+            "เอ๊ะ! อย่าดื้อสิ กดปุ่มสีชมพูเถอะนะ 😾💗",
+            "งอนแล้วนะ ถ้ายูยังกดปุ่มนี้อีก! 😤",
+            "ห้ามกด No แล้วน้า กด Yes เถอะคนดี 🙏🏻"
+        ];
+        function clickNo() {
+            const noMsg = document.getElementById('no-msg');
+            noMsg.textContent = noMessages[noClickCount % noMessages.length];
+            noClickCount++;
+        }
+
+        // หน้า 3: ปักเทียนทีละเล่ม
+        function lightCandle(num) {
+            const candle = document.getElementById(`c${num}`);
+            if (!candle.classList.contains('lit')) {
+                candle.classList.add('lit');
+                currentCandles++;
+                document.getElementById('cake-instruction').textContent = `ปักเทียนแล้ว (${currentCandles}/3)`;
+                
+                if (currentCandles === 3) {
+                    document.getElementById('cake-instruction').textContent = "ปักเทียนครบแล้ว! เริ่มบรรเลงเพลง HBD 🎶";
+                    
+                    // เล่นเพลง (สามารถใส่ไฟล์เสียงของคุณเองได้ที่แท็ก audio ด้านบน)
+                    const audio = document.getElementById('hbd-audio');
+                    audio.play().catch(e => console.log("Audio autoplay prevented or file missing:", e));
+
+                    // จำลองเวลาเพลงจบ (เช่น 5 วินาที หรือปรับตามความยาวเพลงของคุณ)
+                    setTimeout(() => {
+                        document.getElementById('cake-instruction').textContent = "เพลงจบแล้ว! เป่าเทียนกันเถอะ 🎂";
+                        document.getElementById('blow-btn').classList.remove('hidden');
+                    }, 4000);
+                }
+            }
+        }
+
+        // เป่าเทียน ปิดไฟ
+        function blowCandle() {
+            // ดับไฟเทียน
+            document.querySelectorAll('.candle').forEach(c => c.classList.remove('lit'));
+            // ปิดเสียงเพลง (ถ้ายังเล่นอยู่)
+            const audio = document.getElementById('hbd-audio');
+            audio.pause();
+
+            // เปลี่ยนพื้นหลังเป็นโหมดมืด
+            document.body.classList.add('dark-mode');
+
+            // หน่วงเวลาเล็กน้อยแล้วไปหน้าจดหมาย
+            setTimeout(() => {
+                nextPage(4);
+            }, 1500);
+        }
+
+        // หน้า 4: เปิดซองจดหมาย
+        function openLetter() {
+            document.getElementById('flap').style.transform = 'rotateX(180deg)';
+            setTimeout(() => {
+                document.getElementById('envelope-box').classList.add('hidden');
+                document.getElementById('letter-box').classList.remove('hidden');
+            }, 400);
+        }
+    </script>
+</body>
+  </html>
+  
